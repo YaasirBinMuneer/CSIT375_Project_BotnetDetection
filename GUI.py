@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
 
-import Training as trainer  # your trainer.py
+import Training as trainer  
 
+# Redirect stdout to terminal
 class RedirectText:
     def __init__(self, text_ctrl):
         self.output = text_ctrl
@@ -21,13 +22,12 @@ class RedirectText:
     def flush(self):
         pass
 
-
+# GUI Setup
 root = tk.Tk()
 root.title("Botnet Traffic Detection GUI")
 root.geometry("950x500")
-root.configure(bg="#2e2e2e")  
+root.configure(bg="#2e2e2e")  # Dark background
 
-# Fonts & colors
 FONT_TITLE = ("Arial", 16, "bold")
 FONT_LABEL = ("Arial", 11)
 BG_COLOR = "#2e2e2e"
@@ -35,9 +35,7 @@ FG_COLOR = "#f5f5f5"
 ENTRY_BG = "#3e3e3e"
 ENTRY_FG = "#f5f5f5"
 
-
-# Layout 
-
+# Layout Frames
 main_frame = tk.Frame(root, bg=BG_COLOR)
 main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
@@ -47,12 +45,10 @@ terminal_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 button_frame = tk.Frame(main_frame, bg=BG_COLOR)
 button_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=10, pady=10)
 
-
 # Terminal / Log Window
 log_text = tk.Text(terminal_frame, state='disabled', width=60, bg="#1e1e1e", fg="#f5f5f5", font=("Consolas", 10))
 log_text.pack(fill=tk.BOTH, expand=True)
 sys.stdout = RedirectText(log_text)
-
 
 # Title
 title_label = tk.Label(button_frame, text="Botnet Traffic Detection", font=FONT_TITLE, bg=BG_COLOR, fg=FG_COLOR)
@@ -61,8 +57,6 @@ title_label.pack(pady=10)
 # Button Functions
 def show_graphs():
     print("[+] Displaying model performance graphs...")
-
-    # Line plot: Predicted vs Actual (for each model)
     plt.figure(figsize=(10, 5))
     for name, (y_true, y_pred) in trainer.results.items():
         # Count number of predicted and actual labels
@@ -88,6 +82,19 @@ def show_confusion_matrix():
         print(trainer.confusion_matrix(y_true, y_pred))
         print("Classification Report:")
         print(trainer.classification_report(y_true, y_pred))
+
+    print("[+] Displaying confusion matrix graphs...")
+    plt.figure(figsize=(12, 4))  # Smaller figure
+    for i, (name, (y_true, y_pred)) in enumerate(trainer.results.items(), 1):
+        cm = trainer.confusion_matrix(y_true, y_pred)
+        plt.subplot(1, 3, i)
+        sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', cbar=False)
+        plt.title(f"{name}", fontsize=12)
+        plt.xlabel("Predicted")
+        plt.ylabel("Actual")
+    plt.tight_layout()
+    plt.show()
+    
 
 def open_prediction_form():
     form_window = tk.Toplevel(root)
@@ -143,7 +150,6 @@ def open_prediction_form():
     submit_btn = ttk.Button(scroll_frame, text="Submit Prediction", command=predict_traffic)
     submit_btn.pack(pady=10)
 
-
 # Buttons
 style = ttk.Style()
 style.configure("TButton", font=("Arial", 11, "bold"), padding=5)
@@ -157,6 +163,6 @@ btn_cm.pack(pady=5)
 btn_predict = ttk.Button(button_frame, text="Predict Traffic", command=open_prediction_form)
 btn_predict.pack(pady=5)
 
-
+# Launch GUI
 print("[+] Dark GUI Loaded. Terminal on the left. Buttons on the right. Click 'Predict Traffic' to open the form.")
 root.mainloop()
