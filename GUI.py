@@ -8,9 +8,6 @@ import pandas as pd
 
 import Training as trainer  # your trainer.py
 
-# =============================
-# Redirect stdout to terminal
-# =============================
 class RedirectText:
     def __init__(self, text_ctrl):
         self.output = text_ctrl
@@ -24,13 +21,11 @@ class RedirectText:
     def flush(self):
         pass
 
-# =============================
-# GUI Setup
-# =============================
+
 root = tk.Tk()
 root.title("Botnet Traffic Detection GUI")
 root.geometry("950x500")
-root.configure(bg="#2e2e2e")  # Dark background
+root.configure(bg="#2e2e2e")  
 
 # Fonts & colors
 FONT_TITLE = ("Arial", 16, "bold")
@@ -40,36 +35,30 @@ FG_COLOR = "#f5f5f5"
 ENTRY_BG = "#3e3e3e"
 ENTRY_FG = "#f5f5f5"
 
-# =============================
-# Layout Frames
-# =============================
+
+# Layout 
+
 main_frame = tk.Frame(root, bg=BG_COLOR)
 main_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
 
-# Left: terminal
 terminal_frame = tk.Frame(main_frame, bg=BG_COLOR)
 terminal_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
-# Right: buttons
 button_frame = tk.Frame(main_frame, bg=BG_COLOR)
 button_frame.pack(side=tk.RIGHT, fill=tk.Y, padx=10, pady=10)
 
-# =============================
+
 # Terminal / Log Window
-# =============================
 log_text = tk.Text(terminal_frame, state='disabled', width=60, bg="#1e1e1e", fg="#f5f5f5", font=("Consolas", 10))
 log_text.pack(fill=tk.BOTH, expand=True)
 sys.stdout = RedirectText(log_text)
 
-# =============================
+
 # Title
-# =============================
 title_label = tk.Label(button_frame, text="Botnet Traffic Detection", font=FONT_TITLE, bg=BG_COLOR, fg=FG_COLOR)
 title_label.pack(pady=10)
 
-# =============================
 # Button Functions
-# =============================
 def show_graphs():
     print("[+] Displaying model performance graphs...")
 
@@ -154,9 +143,8 @@ def open_prediction_form():
     submit_btn = ttk.Button(scroll_frame, text="Submit Prediction", command=predict_traffic)
     submit_btn.pack(pady=10)
 
-# =============================
+
 # Buttons
-# =============================
 style = ttk.Style()
 style.configure("TButton", font=("Arial", 11, "bold"), padding=5)
 
@@ -169,8 +157,6 @@ btn_cm.pack(pady=5)
 btn_predict = ttk.Button(button_frame, text="Predict Traffic", command=open_prediction_form)
 btn_predict.pack(pady=5)
 
-# =============================
-# Launch GUI
-# =============================
+
 print("[+] Dark GUI Loaded. Terminal on the left. Buttons on the right. Click 'Predict Traffic' to open the form.")
 root.mainloop()
