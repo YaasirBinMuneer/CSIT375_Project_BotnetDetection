@@ -25,7 +25,7 @@ class RedirectText:
         pass # Required for stdout redirection but not actually used
 
 # GUI Setup: Create the main window and configure its appearance
-root = tk.Tk()
+root = tk.Tk() # Create the root window (main GUI window)
 root.title("Botnet Traffic Detection GUI") # Set window title
 root.geometry("950x500") # Set window size
 root.configure(bg="#2e2e2e")  # Dark background colour
@@ -62,9 +62,9 @@ title_label.pack(pady=10)
 # Function to display model performance graphs
 # Button functions
 def show_graphs():
-    print("[+] Displaying model performance graphs...")                  # Log to terminal
-    plt.figure(figsize=(10, 5))                                          # Create a figure for plotting
-    for name, (y_true, y_pred) in trainer.results.items():               # Iterate over model results
+    print("[+] Displaying model performance graphs...") # Log to terminal
+    plt.figure(figsize=(10, 5)) # Create a figure for plotting
+    for name, (y_true, y_pred) in trainer.results.items(): # Iterate over model results
         # Count number of predicted and actual labels 
         actual_counts = pd.Series(y_true).value_counts().sort_index()
         pred_counts = pd.Series(y_pred).value_counts().sort_index()
@@ -138,7 +138,7 @@ def open_prediction_form():
         # Label for the feature
         lbl = tk.Label(scroll_frame, text=feature, bg=BG_COLOR, fg=FG_COLOR, font=FONT_LABEL)
         lbl.pack(anchor='w', padx=5, pady=2) # Pack label
-         # Entry field for user input
+        # Entry field for user input
         ent = tk.Entry(scroll_frame, bg=ENTRY_BG, fg=ENTRY_FG, insertbackground=FG_COLOR)
         ent.pack(fill=tk.X, padx=5, pady=2) # Pack entry
         entries[feature] = ent # Store entry in dictionary
@@ -195,3 +195,4 @@ btn_predict.pack(pady=5)
 # Launch GUI and display initial message
 print("[+] Dark GUI Loaded. Terminal on the left. Buttons on the right. Click 'Predict Traffic' to open the form.")
 root.mainloop() # Start the Tkinter event loop
+
