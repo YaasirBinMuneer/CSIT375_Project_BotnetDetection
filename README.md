@@ -49,9 +49,6 @@ The system trains multiple models on the **UNSW-NB15 dataset** and allows users 
 The GUI requires only these main inputs:
 dur, proto, service, state, sbytes, dbytes, rate
 
-yaml
-Copy code
-
 All remaining features are automatically filled with default values by the system.
 
 ---
@@ -67,14 +64,8 @@ All remaining features are automatically filled with default values by the syste
 2. Install required libraries:
 pip install pandas numpy scikit-learn matplotlib seaborn joblib
 
-markdown
-Copy code
-
 3. Run the application:
 python GUI.py
-
-yaml
-Copy code
 
 ---
 
