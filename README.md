@@ -5,6 +5,34 @@ It trains multiple models, evaluates their performance, and provides a Tkinter-b
 
 ---
 
+## Required Libraries
+
+- tkinter
+- ttk
+- messagebox
+- sys
+- time
+- numpy
+- pandas
+- matplotlib.pyplot
+- seaborn
+- FigureCanvasTkAgg
+- train_test_split
+- StratifiedKFold
+- cross_val_score
+- OrdinalEncoder
+- LabelEncoder
+- StandardScaler
+- RandomForestClassifier
+- LogisticRegression
+- KNeighborsClassifier
+- classification_report
+- confusion_matrix
+- accuracy_score
+- joblib
+
+---
+
 ## Features
 
 - Machine-learning-based botnet detection  
